@@ -1,47 +1,62 @@
-# BE Connect - Engineering Student Collaboration Platform
+# Task Manager (React + Node.js + MongoDB)
 
-Welcome to the full-stack BE Connect hackathon MVP built with React (Frontend) and Django REST Framework (Backend). 
+Full‑stack task manager web app with:
 
-## 🚀 Tech Stack Highlights
+- **Auth**: signup + login (JWT)
+- **Tasks**: add, edit, delete (per-user)
 
-- **Frontend**: React.js with Vite, React Router, Axios, and styled using modern, premium custom CSS (Glassmorphism & Gradients) featuring `lucide-react` icons.
-- **Backend**: Python with Django and Django REST Framework.
-- **Database**: SQLite3 by default (to ensure instant plug & play without database setup during hackathon). *Easily switchable to MySQL in `backend/core/settings.py`.*
-- **Authentication**: JWT setup via `djangorestframework-simplejwt`. 
+This repo already contains a legacy Django backend (`backend/`). For this task manager, the Node.js backend lives in `server/` and the React app lives in `frontend/`.
 
-## ⚙️ How to Run
+## Prerequisites
 
-### 1. Run the Backend
+- Node.js 18+ (recommended)
+- MongoDB running locally **or** a MongoDB Atlas connection string
 
-Open a terminal and:
+## Setup
+
+### 1) Backend (Node.js + Express)
+
+Create `server/.env`:
+
 ```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate  # Windows
-pip install -r requirements.txt # (If generated) or just run the following commands!
-python manage.py runserver 0.0.0.0:8000
+MONGODB_URI=mongodb://127.0.0.1:27017/task_manager
+JWT_SECRET=change_me
+PORT=5000
+CLIENT_ORIGIN=http://localhost:5194
 ```
-*Note: Make sure to clear migrations or run `python manage.py makemigrations` and `python manage.py migrate` if required.*
 
-### 2. Run the Frontend
+Install and run:
 
-Open another terminal and:
+```bash
+cd server
+npm install
+npm run dev
+```
+
+API runs on `http://localhost:5000`.
+
+### 2) Frontend (React)
+
+Create `frontend/.env`:
+
+```bash
+VITE_API_BASE_URL=http://localhost:5000
+```
+
+Install and run:
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-The frontend will be available at `http://localhost:5173`. 
+App runs on `http://localhost:5194`.
 
-## 🌟 Modules Implemented
+## Features
 
-1. **Authentication System (JWT)**: Login and register flow mapped directly to a heavily customized User model.
-2. **Student Dashboard**: Visually rich overview displaying key collaboration stats.
-3. **Project Collaboration**: Find teammates by posting requirements.
-4. **Discussion Forum**: Threaded questions & answers section for peers.
-5. **Resources Sharing**: Cloud-integrated upload section (using external URLs to preserve fast hackathon MVP dynamics).
-6. **Hackathons**: Discover and post upcoming technical hackathon opportunities.
-7. **Profile View**: View and update your branch, skills, bio, and GitHub links.
-
-> *Good luck with the Hackathon presentation! The UI rules are strictly adhered to, keeping the frontend dynamic, responsive, and stunning without complex CSS framework dependencies.*
+- Signup / Login
+- Task list (only your tasks)
+- Add task
+- Edit task
+- Delete task
